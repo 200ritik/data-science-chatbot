@@ -13,7 +13,7 @@ Original file is located at
 
 import os
 
-pip install pymupdf
+# pip install pymupdf
 
 from langchain_community.document_loaders import PyMuPDFLoader
 
