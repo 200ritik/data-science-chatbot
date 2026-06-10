@@ -7,7 +7,7 @@ langchain-huggingface
 google-generativeai
 faiss-cpu
 sentence-transformers
-pymupdf
+PyMuPDF
 pypdf
 huggingface-hub
 numpy
