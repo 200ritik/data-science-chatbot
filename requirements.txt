@@ -12,3 +12,5 @@ pypdf
 huggingface-hub
 numpy
 python-dotenv
+torch
+torchvision
