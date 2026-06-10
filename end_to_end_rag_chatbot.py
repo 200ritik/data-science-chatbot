@@ -7,9 +7,9 @@ Original file is located at
     https://colab.research.google.com/drive/1sO7F3eEP8oBUhDJoJSYk1kLR647TrEAR
 """
 
-pip install langchain-community
+# pip install langchain-community
 
-pip install langchain_text_splitters
+# pip install langchain_text_splitters
 
 import os
 
@@ -39,7 +39,7 @@ len(splitted_data)
 
 # embadding technique
 
-!pip install langchain-huggingface
+# !pip install langchain-huggingface
 from langchain_huggingface import HuggingFaceEmbeddings
 
 embeddings = HuggingFaceEmbeddings(
@@ -48,9 +48,9 @@ embeddings = HuggingFaceEmbeddings(
 
 """PHASE 4 -----FAISS VECTOR DB-----"""
 
-pip install langchain_faiss
+# pip install langchain_faiss
 
-pip install faiss-cpu
+# pip install faiss-cpu
 
 from langchain_community.vectorstores import FAISS
 
@@ -64,7 +64,7 @@ vector_store = FAISS.from_documents(
 from google.colab import userdata
 api_key=userdata.get('GEMINI_API_KEY')
 
-!pip install -U langchain-google-genai google-generativeai
+# !pip install -U langchain-google-genai google-generativeai
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -141,7 +141,7 @@ print(res.content)
 
 # streamlit
 
-pip install streamlit
+# pip install streamlit
 
 import streamlit as st
 
