@@ -45,14 +45,14 @@ len(splitted_data)
 from langchain_huggingface import HuggingFaceEmbeddings
 
 @st.cache_resource
-def create_vector_store():
-    return FAISS.from_documents(
-        documents=splitted_data,
-        embedding=embeddings
+def load_embeddings():
+    return HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5"
     )
 
-vector_store = create_vector_store()
 embeddings = load_embeddings()
+# vector_store = create_vector_store()
+# embeddings = load_embeddings()
 
 # """PHASE 4 -----FAISS VECTOR DB-----"""
 
@@ -68,7 +68,7 @@ def create_vector_store():
         documents=splitted_data,
         embedding=embeddings
     )
-
+vector_store = create_vector_store()
 
 # !pip install -U langchain-google-genai google-generativeai
 
