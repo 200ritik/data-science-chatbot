@@ -17,8 +17,7 @@ import os
 
 from langchain_community.document_loaders import PyMuPDFLoader
 
-doc = PyMuPDFLoader("/content/DSML.pdf")
-
+doc = PyMuPDFLoader("DSML.pdf")
 docs = doc.load()
 
 len(docs)
