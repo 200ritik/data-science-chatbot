@@ -59,9 +59,8 @@ vector_store = FAISS.from_documents(
 
 # """  PHASE 5 ------LLM MODEL-------"""
 
-from google.colab import userdata
-api_key=userdata.get('GEMINI_API_KEY')
-
+import streamlit as st
+api_key = st.secrets["GEMINI_API_KEY"]
 # !pip install -U langchain-google-genai google-generativeai
 
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -141,7 +140,7 @@ print(res.content)
 
 # pip install streamlit
 
-import streamlit as st
+# import streamlit as st
 
 st.title("RAG BASED CHATBOT FOR DATA SCIENTIST")
 
