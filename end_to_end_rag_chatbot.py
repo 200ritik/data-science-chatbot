@@ -77,7 +77,7 @@ api_key = st.secrets["GEMINI_API_KEY"]
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(
-    model = "gemini-2.5-flash",
+    model = "gemini-1.5-flash",
     google_api_key= api_key
 )
 
@@ -96,7 +96,7 @@ def get_context(query: str):
 
     data = vector_store.similarity_search(
         query=query,
-        k=10
+        k=5
     )
 
     # print(f"Retrieved Chunks: {len(data)}")
