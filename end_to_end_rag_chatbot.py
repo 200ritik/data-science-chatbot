@@ -67,11 +67,7 @@ def create_vector_store():
         embedding=embeddings
     )
 
-vector_store = create_vector_store()
 
-# """  PHASE 5 ------LLM MODEL-------"""
-
-api_key = st.secrets["GEMINI_API_KEY"]
 # !pip install -U langchain-google-genai google-generativeai
 
 from langchain_google_genai import ChatGoogleGenerativeAI
