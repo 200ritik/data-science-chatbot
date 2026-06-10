@@ -10,6 +10,7 @@
 # pip install langchain-community
 
 # pip install langchain_text_splitters
+import streamlit as st
 
 import os
 
@@ -39,7 +40,7 @@ len(splitted_data)
 
 # !pip install langchain-huggingface
 
-import streamlit as st
+# import streamlit as st
 
 from langchain_huggingface import HuggingFaceEmbeddings
 
