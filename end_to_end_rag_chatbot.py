@@ -45,11 +45,13 @@ len(splitted_data)
 from langchain_huggingface import HuggingFaceEmbeddings
 
 @st.cache_resource
-def load_embeddings():
-    return HuggingFaceEmbeddings(
-        model_name="BAAI/bge-small-en-v1.5"
+def create_vector_store():
+    return FAISS.from_documents(
+        documents=splitted_data,
+        embedding=embeddings
     )
 
+vector_store = create_vector_store()
 embeddings = load_embeddings()
 
 # """PHASE 4 -----FAISS VECTOR DB-----"""
@@ -185,15 +187,18 @@ if query:
 
     else:
 
-        with st.spinner("Thinking..."):
+         with st.spinner("Thinking..."):
+
+        try:
             response = rag_chain.invoke(query).content
 
+        except Exception as e:
+            response = f"Error: {str(e)}"
+
     st.session_state.messages.append(
-        {"role":"assistant","content":response}
-    )
-
-    st.chat_message("assistant").markdown(response)
-
+        {
+            "role":"assistant",
+            "content":response
 
 
 
