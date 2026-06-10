@@ -14,3 +14,4 @@ numpy
 python-dotenv
 torch
 torchvision
+langchain-groq
