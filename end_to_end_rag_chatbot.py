@@ -27,7 +27,7 @@ len(docs)
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-splitter = RecursiveCharacterTextSplitter(chunk_size = 3000, chunk_overlap= 500)
+splitter = RecursiveCharacterTextSplitter(chunk_size = 1000, chunk_overlap= 200)
 
 splitted_data = splitter.split_documents(docs)
 
@@ -38,11 +38,18 @@ len(splitted_data)
 # embadding technique
 
 # !pip install langchain-huggingface
+
+import streamlit as st
+
 from langchain_huggingface import HuggingFaceEmbeddings
 
-embeddings = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-en-v1.5"
-)
+@st.cache_resource
+def load_embeddings():
+    return HuggingFaceEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5"
+    )
+
+embeddings = load_embeddings()
 
 # """PHASE 4 -----FAISS VECTOR DB-----"""
 
@@ -52,14 +59,17 @@ embeddings = HuggingFaceEmbeddings(
 
 from langchain_community.vectorstores import FAISS
 
-vector_store = FAISS.from_documents(
-    documents= splitted_data,
-    embedding = embeddings
-)
+@st.cache_resource
+def create_vector_store():
+    return FAISS.from_documents(
+        documents=splitted_data,
+        embedding=embeddings
+    )
+
+vector_store = create_vector_store()
 
 # """  PHASE 5 ------LLM MODEL-------"""
 
-import streamlit as st
 api_key = st.secrets["GEMINI_API_KEY"]
 # !pip install -U langchain-google-genai google-generativeai
 
@@ -70,9 +80,9 @@ llm = ChatGoogleGenerativeAI(
     google_api_key= api_key
 )
 
-result = llm.invoke("What is Machine Learning?")
+# result = llm.invoke("What is Machine Learning?")
 
-print(result.content)
+# print(result.content)
 
 # now connection or creating chain for all the phases
 
@@ -88,7 +98,7 @@ def get_context(query: str):
         k=10
     )
 
-    print(f"Retrieved Chunks: {len(data)}")
+    # print(f"Retrieved Chunks: {len(data)}")
 
     context = "\n\n".join(
         [doc.page_content for doc in data]
@@ -129,12 +139,6 @@ PROMPT = PromptTemplate(
 )
 
 rag_chain = get_context | PROMPT | llm
-
-res = rag_chain.invoke(
-    "What is ritik?"
-)
-
-print(res.content)
 
 # streamlit
 
