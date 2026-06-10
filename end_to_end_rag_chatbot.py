@@ -76,9 +76,11 @@ api_key = st.secrets["GEMINI_API_KEY"]
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatGoogleGenerativeAI(
-    model = "gemini-1.5-flash",
-    google_api_key= api_key
+from langchain_groq import ChatGroq
+
+llm = ChatGroq(
+    groq_api_key=st.secrets["GROQ_API_KEY"],
+    model_name="llama-3.3-70b-versatile"
 )
 
 # result = llm.invoke("What is Machine Learning?")
