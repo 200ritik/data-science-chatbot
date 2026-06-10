@@ -171,7 +171,7 @@ for message in st.session_state.messages:
 if query:
 
     st.session_state.messages.append(
-        {"role":"user","content":query}
+        {"role": "user", "content": query}
     )
 
     st.chat_message("user").markdown(query)
@@ -187,19 +187,22 @@ if query:
 
     else:
 
-         with st.spinner("Thinking..."):
+        with st.spinner("Thinking..."):
 
-        try:
-            response = rag_chain.invoke(query).content
+            try:
+                response = rag_chain.invoke(query).content
 
-        except Exception as e:
-            response = f"Error: {str(e)}"
+            except Exception as e:
+                response = f"Error: {str(e)}"
 
     st.session_state.messages.append(
         {
-            "role":"assistant",
-            "content":response
+            "role": "assistant",
+            "content": response
+        }
+    )
 
+    st.chat_message("assistant").markdown(response)
 
 
 
