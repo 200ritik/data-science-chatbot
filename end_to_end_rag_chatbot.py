@@ -171,20 +171,25 @@ if query:
 
     st.chat_message("user").markdown(query)
 
-    with st.spinner("Thinking..."):
+    query_lower = query.lower().strip()
 
-        res = rag_chain.invoke(query)
+    if query_lower in ["hi", "hello", "hey", "hii"]:
+
+        response = (
+            "Hello! I am a Data Science PDF Chatbot. "
+            "Ask me anything about the document."
+        )
+
+    else:
+
+        with st.spinner("Thinking..."):
+            response = rag_chain.invoke(query).content
 
     st.session_state.messages.append(
-        {
-            "role":"assistant",
-            "content":res.content
-        }
+        {"role":"assistant","content":response}
     )
 
-    st.chat_message("assistant").markdown(
-        res.content
-    )
+    st.chat_message("assistant").markdown(response)
 
 
 
